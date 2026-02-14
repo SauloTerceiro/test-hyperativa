@@ -1,0 +1,48 @@
+services:
+  userservice:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    container_name: teeva-backend
+    depends_on:
+      - teeva-db
+      - redis
+    environment:
+    - SPRING_DATASOURCE_URL=jdbc:mysql://teeva-db:3306/teeva?allowPublicKeyRetrieval=true&useSSL=false
+    - SPRING_DATASOURCE_USERNAME=teeva
+    - SPRING_DATASOURCE_PASSWORD=teeva123
+    - SPRING_REDIS_HOST=redis
+    - SPRING_REDIS_PORT=6379
+    networks:
+      - teeva-network
+
+  teeva-db:
+    image: mysql:8.0
+    container_name: teeva-db
+    environment:
+      MYSQL_DATABASE: teeva
+      MYSQL_USER: teeva
+      MYSQL_PASSWORD: teeva123
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - teeva-network
+
+  redis:
+    image: redis:7
+    container_name: teeva-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - teeva-network
+
+volumes:
+  mysql-data:
+
+networks:
+  teeva-network:
