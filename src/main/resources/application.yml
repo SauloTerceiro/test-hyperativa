@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/teeva?allowPublicKeyRetrieval=true&useSSL=false
-    username: teeva
-    password: teeva123
+    url: jdbc:mysql://localhost:3306/hyperativa?allowPublicKeyRetrieval=true&useSSL=false
+    username: hyperativa
+    password: hyperativa123
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

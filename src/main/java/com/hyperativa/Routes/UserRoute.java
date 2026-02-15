@@ -1,7 +1,8 @@
 package com.hyperativa.Routes;
 
-import com.teeva.Entities.User;
-import com.teeva.Services.UserService;
+
+import com.hyperativa.Entities.User;
+import com.hyperativa.Services.UserService;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
