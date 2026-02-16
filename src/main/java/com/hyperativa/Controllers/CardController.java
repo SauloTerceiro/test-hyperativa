@@ -1,5 +1,6 @@
 package com.hyperativa.Controllers;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -8,6 +9,7 @@ import org.apache.camel.ProducerTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hyperativa.Dtos.CardDTO;
 import com.hyperativa.Routes.CardRoute;
@@ -36,6 +38,15 @@ public class CardController {
 
         CardDTO createdCard = producerTemplate.requestBody(CardRoute.CREATE_CARD, cardDTO, CardDTO.class);
         return ResponseEntity.ok(createdCard);
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<List<CardDTO>> uploadBatchFile(@RequestParam("file") MultipartFile file) throws IOException {
+        if (file.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+        List<CardDTO> createdCards = producerTemplate.requestBody(CardRoute.PROCESS_BATCH_FILE, file.getInputStream(), List.class);
+        return ResponseEntity.ok(createdCards);
     }
 
     @GetMapping

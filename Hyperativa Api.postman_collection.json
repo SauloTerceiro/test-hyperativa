@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "c545b61b-a0a7-42b3-ab93-103aca2a3d6e",
+		"name": "Hyperativa Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16114642",
+		"_collection_link": "https://crimson-moon-39140.postman.co/workspace/DEMO-API~205c27eb-ae90-48d2-8a0e-e8a411aacc9b/collection/16114642-c545b61b-a0a7-42b3-ab93-103aca2a3d6e?action=share&source=collection_link&creator=16114642"
+	},
+	"item": [
+		{
+			"name": "CardsCreate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBoeXBlcmF0aXZhLmNvbSIsImlkIjoxLCJyb2xlIjoxLCJpYXQiOjE3NzExODEwNjEsImV4cCI6MTc3MTE4ODI2MX0.59ufTQSuDytwr2B3-T7USZBQCc244wawgu-ttd_6GNQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"identifier\": \"C\",\r\n  \"numberInBatch\": \"000001\",\r\n  \"cardNumber\": \"4456897999999999\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/cards",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllCards",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBoeXBlcmF0aXZhLmNvbSIsImlkIjoxLCJyb2xlIjoxLCJpYXQiOjE3NzEyNzYyNzEsImV4cCI6MTc3MTI4MzQ3MX0.McKr0lEkus0QHUAoAheHoUcbMFEY_POZ38Y0-ghYmGs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dataCriacao\": \"2023-10-01\",\r\n  \"observacao\": \"Pedido urgente\",\r\n  \"prioridade\": \"Alta\",\r\n  \"classificacao\": \"VIP\",\r\n  \"producao\": \"Industrial\",\r\n  \"produto\": \"Bolsa\",\r\n  \"tipoCouro\": \"Couro Legítimo\",\r\n  \"cor\": \"Preto\",\r\n  \"personalizacao\": \"Iniciais\",\r\n  \"impressao\": \"Sublimação\",\r\n  \"endereco\": \"Rua das Flores, 123\",\r\n  \"estado\": \"SP\",\r\n  \"valorDoPedido\": \"R$ 500,00\",\r\n  \"valorDoFrete\": 50.0,\r\n  \"expedicao\": \"Sedex\",\r\n  \"etiqueta\": \"ETI123\",\r\n  \"dataEtiqueta\": \"2023-10-02\",\r\n  \"dataEmbalagem\": \"2023-10-03\",\r\n  \"embalagem\": \"Caixa de Papelão\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/cards",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usercheck",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"email\": \"admin@hyperativa.com\",\r\n    \"password\":\"admin123\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/check-password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"check-password"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -8,6 +8,7 @@ services:
     container_name: hyperativa-backend
     depends_on:
       - hyperativa-db
+    restart: on-failure
     environment:
     - SPRING_DATASOURCE_URL=jdbc:mysql://hyperativa-db:3306/hyperativa?allowPublicKeyRetrieval=true&useSSL=false
     - SPRING_DATASOURCE_USERNAME=hyperativa

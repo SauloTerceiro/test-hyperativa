@@ -11,6 +11,7 @@ public class CardRoute extends RouteBuilder {
     public static final String GET_CARD_BY_ID = "direct:getCardById";
     public static final String UPDATE_CARD = "direct:updateCard";
     public static final String DELETE_CARD = "direct:deleteCard";
+    public static final String PROCESS_BATCH_FILE = "direct:processBatchFile";
 
     @Override
     public void configure() {
@@ -38,5 +39,10 @@ public class CardRoute extends RouteBuilder {
             .routeId("deleteCard")
             .log("Deleting Card")
             .bean("cardService", "deleteCard");
+
+        from(PROCESS_BATCH_FILE)
+            .routeId("processBatchFile")
+            .log("Processing batch file")
+            .bean("cardService", "processBatchFile");
     }
 }

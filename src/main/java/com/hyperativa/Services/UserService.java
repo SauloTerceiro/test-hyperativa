@@ -107,40 +107,56 @@ public class UserService {
         String verificationCode = user.getVerificationCode();
         String username = user.getName();
         String password = user.getPassword();
-        logger.info("Updating user with email: {}", email);
+        logger.info("Starting update for user with email: {}", email);
 
         // Find user by email
-        User userEmail = findUserByEmail(user.getEmail());
+        User userEmail;
+        try {
+            userEmail = findUserByEmail(user.getEmail());
+            logger.info("User found: {}", userEmail.getEmail());
+        } catch (UserNotFoundException e) {
+            logger.error("User not found with email: {}", email);
+            throw e;
+        }
 
 
         if(userEmail.getName()!=null){
-            logger.info("Name: {}", userEmail.getName());
+            logger.warn("User already registered (name exists): {}", userEmail.getName());
             throw new EmailAlreadyRegisteredException("Email has already registered");
         }
 
         if(userEmail.getPassword()!=null&&!("".equals(userEmail.getPassword()))){
-            logger.info("Password", userEmail.getPassword());
+            logger.warn("User already registered (password exists)");
             throw new EmailAlreadyRegisteredException("Email has already registered");
         }
 
 
         // Check if verification code matches
         if (!verificationCode.equals(userEmail.getVerificationCode())) {
+            logger.error("Verification code mismatch for email: {}. Expected: {}, Received: {}", email, userEmail.getVerificationCode(), verificationCode);
             throw new VerificationCodeMismatchException("Invalid verification code");
         }
 
         // Update username (if provided)
         if (username != null && !username.isEmpty()) {
+            logger.info("Updating username to: {}", username);
             userEmail.setName(username);
         }
 
         // Update password (if provided)
         if (password != null && !password.isEmpty()) {
+            logger.info("Updating password for user: {}", email);
             String encodedPassword = passwordEncoder.encode(password);
             userEmail.setPassword(encodedPassword);
         }
 
         // Save changes to database
-        return userRepository.save(userEmail);
+        try {
+            logger.info("Saving updated user to database: {}", email);
+            return userRepository.save(userEmail);
+        } catch (Exception e) {
+            logger.error("Error saving user to database for email {}: {}", email, e.getMessage(), e);
+            throw new RuntimeException("Failed to save user updates", e);
+        }
     }
 }
